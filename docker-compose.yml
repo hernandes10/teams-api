@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017  
+    volumes:
+      - ./data/db-01:/data/db 
+    networks:
+      - app-network
+     
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-expressdb
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - app-network
+
+  app:
+    build: .
+    image: teams-api:latest
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    networks:
+      - app-network  
+    command: npm run dev  
+
+
+
+networks:
+  app-network:
+    driver: bridge    
