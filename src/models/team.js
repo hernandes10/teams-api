@@ -6,7 +6,8 @@ const teamSchema = new mongoose.Schema(
     name: {type: String, required: true},
     flag: {type: String, default:'no_image.jpg'},
     country: {type: String, required: true},
-    country_flag: {type: String, default:'no_image.jpg'}
+    country_flag: {type: String, default:'no_image.jpg'},
+      country_base: {type: String, required: true},
   }
 );
 
